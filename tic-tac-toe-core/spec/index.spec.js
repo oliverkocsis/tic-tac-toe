@@ -43,13 +43,13 @@ describe("Tic-tac-toe", function () {
     it("horizontal,", function () {
       let winner;
       winner = this.game.next(0, 0); // x
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(1, 0); // o
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(0, 1); // x
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(1, 1); // o
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(0, 2); // x
       expect(winner).toEqual('x');
 
@@ -63,13 +63,13 @@ describe("Tic-tac-toe", function () {
     it("vertical,", function () {
       let winner;
       winner = this.game.next(0, 0); // x
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(0, 2); // o
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(1, 0); // x
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(1, 2); // o
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(2, 0); // x
       expect(winner).toEqual('x');
 
@@ -83,13 +83,13 @@ describe("Tic-tac-toe", function () {
     it("or diagonal row.", function () {
       let winner;
       winner = this.game.next(0, 0); // x
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(1, 0); // o
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(1, 1); // x
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(1, 2); // o
-      expect(winner).toEqual('');
+      expect(winner).toBeUndefined();
       winner = this.game.next(2, 2); // x
       expect(winner).toEqual('x');
 
