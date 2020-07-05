@@ -1,19 +1,19 @@
 import React from 'react';
-import './Grid.css';
 import Space from './Space'
 
-function Grid() {
+function Grid(props) {
+  const style = {
+    margin: 'auto',
+    width: '30rem',
+    display: 'grid',
+    gridTemplateColumns: 'auto auto auto',
+  }
+
   return (
-    <div className="Grid">
-      <Space />
-      <Space />
-      <Space />
-      <Space />
-      <Space />
-      <Space />
-      <Space />
-      <Space />
-      <Space />
+    <div style={style}>
+      {
+        props.grid.map((row, i) => row.map((space, j) => <Space mark={space} row={i} col={j} onMark={props.onMark}/>))
+      }
     </div>
   );
 }
