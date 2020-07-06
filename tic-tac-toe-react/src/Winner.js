@@ -7,10 +7,10 @@ function Winner(props) {
     marginTop: '1rem',
     textAlign: 'center',
     verticalAlign: 'middle',
-    fontSize: '4rem',
+
   }
 
-  return <div style={style}>The winner is: {props.winner}</div>;
+  return <div style={style}>{props.winner} won</div>;
 }
 
 export default Winner;

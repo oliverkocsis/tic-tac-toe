@@ -80,7 +80,7 @@ describe("Tic-tac-toe", function () {
       ]);
     });
 
-    it("or diagonal row.", function () {
+    it("diagonal (\\),", function () {
       let winner;
       winner = this.game.next(0, 0); // x
       expect(winner).toBeUndefined();
@@ -97,6 +97,28 @@ describe("Tic-tac-toe", function () {
         ['x', ' ', ' '],
         ['o', 'x', 'o'],
         [' ', ' ', 'x'],
+      ]);
+    });
+
+    it("or diagonal (/) row.", function () {
+      let winner;
+      winner = this.game.next(0, 0); // x
+      expect(winner).toBeUndefined();
+      winner = this.game.next(1, 1); // o
+      expect(winner).toBeUndefined();
+      winner = this.game.next(1, 0); // x
+      expect(winner).toBeUndefined();
+      winner = this.game.next(2, 0); // o
+      expect(winner).toBeUndefined();
+      winner = this.game.next(0, 1); // x
+      expect(winner).toBeUndefined();
+      winner = this.game.next(0, 2); // o
+      expect(winner).toEqual('o');
+
+      expect(this.game.view()).toEqual([
+        ['x', 'x', 'o'],
+        ['x', 'o', ' '],
+        ['o', ' ', ' '],
       ]);
     });
 

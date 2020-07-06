@@ -32,7 +32,7 @@ class TicTacToe {
             if (' ' !== first && this.grid[1][1] === first && this.grid[2][2] === first) {
                 return first;
             }
-            first = this.grid[2][0];
+            first = this.grid[0][2];
             if (' ' !== first && this.grid[1][1] === first && this.grid[2][0] === first) {
                 return first;
             }
