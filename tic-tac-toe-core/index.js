@@ -1,10 +1,9 @@
 class TicTacToe {
-    grid = [
-        [' ', ' ', ' '],
-        [' ', ' ', ' '],
-        [' ', ' ', ' ']
-    ]
-    player = 'x';
+
+    constructor() {
+        this.reset();
+    }
+
 
     next(x, y) {
         const space = this.grid[x][y];
@@ -46,6 +45,19 @@ class TicTacToe {
 
     view() {
         return this.grid;
+    }
+
+    current() {
+        return this.player;
+    }
+
+    reset() {
+        this.grid = [
+            [' ', ' ', ' '],
+            [' ', ' ', ' '],
+            [' ', ' ', ' ']
+        ]
+        this.player = 'x';
     }
 }
 

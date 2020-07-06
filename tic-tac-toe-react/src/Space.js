@@ -4,6 +4,7 @@ function Space(props) {
   let style = {
     textAlign: 'center',
     verticalAlign: 'middle',
+    height: '11rem',
   }
 
   if (props.row < 2) {

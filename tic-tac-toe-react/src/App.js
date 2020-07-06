@@ -1,41 +1,56 @@
 import React from 'react';
+import { TicTacToe } from 'tic-tac-toe-core';
 import Counter from './Counter';
 import Grid from './Grid';
+import Winner from './Winner';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      grid: [
-        ['X', ' ', ' '],
-        ['X', ' ', ' '],
-        ['X', ' ', ' ']
-      ],
-      x: true,
+      game: new TicTacToe()
     }
   }
 
   onMark = (row, col) => {
-    const grid = this.state.grid;
-    grid[row][col] = this.state.x ? 'X' : 'O';
+    const game = this.state.game;
+    let winner;
+    if (this.state.winner) {
+      winner = undefined;
+      game.reset();
+    } else {
+      try {
+        winner = game.next(row, col);
+        console.info(winner);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     this.setState({
-      grid: grid,
-      x: !this.state.x,
-    })
+      game: game,
+      winner: winner,
+    });
   }
 
   render() {
     const style = {
       margin: 'auto',
-      width: '30rem',
+      width: '33rem',
       fontSize: '7rem',
+    }
+
+    let winner;
+    if (this.state.winner) {
+      winner = <Winner winner={this.state.winner} />;
     }
 
     return (
       <div style={style}>
-        <Counter />
-        <Grid grid={this.state.grid} onMark={this.onMark} />
+        <Counter current={this.state.game.current()} />
+        <Grid grid={this.state.game.view()} onMark={this.onMark} />
+        {winner}
       </div>
     );
   }

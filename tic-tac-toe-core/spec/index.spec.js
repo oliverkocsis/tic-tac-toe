@@ -102,4 +102,32 @@ describe("Tic-tac-toe", function () {
 
   });
 
+  describe("should not win", function () {
+
+    it("example one,", function () {
+      let winner;
+      winner = this.game.next(0, 0); // x
+      expect(winner).toBeUndefined();
+      winner = this.game.next(0, 1); // o
+      expect(winner).toBeUndefined();
+      winner = this.game.next(1, 1); // x
+      expect(winner).toBeUndefined();
+      winner = this.game.next(1, 2); // o
+      expect(winner).toBeUndefined();
+      winner = this.game.next(2, 1); // x
+      expect(winner).toBeUndefined();
+      winner = this.game.next(2, 2); // o
+      expect(winner).toBeUndefined();
+      winner = this.game.next(2, 0); // x
+      expect(winner).toBeUndefined();
+
+      expect(this.game.view()).toEqual([
+        ['x', 'o', ' '],
+        [' ', 'x', 'o'],
+        ['x', 'x', 'o'],
+      ]);
+    });
+
+  });
+
 });

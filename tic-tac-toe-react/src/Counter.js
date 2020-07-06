@@ -2,25 +2,33 @@ import React from 'react';
 
 function Counter(props) {
   const style = {
+    margin: 'auto',
+    width: '100%',
     display: 'grid',
-    gridTemplateColumns: 'auto auto',
+    gridTemplateColumns: '11rem 11rem 11rem',
     marginBottom: '1rem',
+    textAlign: 'center',
+    verticalAlign: 'middle',
   }
 
-  const left = {
-    textAlign: 'left',
-    paddingLeft: '2.75rem',
-  }
+  let styleX;
+  let styleO;
 
-  const right = {
-    textAlign: 'right',
-    paddingRight: '2.75rem',
+  if (props.current === 'o') {
+    styleX = {
+      color: '#d8dee9',
+    }
+  } else {
+    styleO = {
+      color: '#d8dee9',
+    }
   }
 
   return (
     <div style={style}>
-      <div style={left}>X</div>
-      <div style={right}>O</div>
+      <div style={styleX}>x</div>
+      <div>&nbsp;</div>
+      <div style={styleO}>o</div>
     </div>
   );
 }
