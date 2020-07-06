@@ -51,7 +51,7 @@ class App extends React.Component {
         <Counter current={this.state.game.current()} />
         <Grid grid={this.state.game.view()} onMark={this.onMark} />
         {winner}
-        <p style={{ fontSize: '0.75rem', textAlign: 'center' }}><a href="https://github.com/oliverkocsis/tic-tac-toe">https://github.com/oliverkocsis/tic-tac-toe</a></p>
+        <p style={{ fontSize: '0.75rem', textAlign: 'center', marginTop: '3.5rem'}}><a href="https://github.com/oliverkocsis/tic-tac-toe">https://github.com/oliverkocsis/tic-tac-toe</a></p>
       </div>
     );
   }
