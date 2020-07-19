@@ -39,6 +39,14 @@ export class Grid {
     return cell === mark
   }
 
+  didXWin() {
+    return false;
+  }
+
+  didOwin() {
+    return false;
+  }
+
   _calculateIndexFor(indexOfRow, indexOfColumn) {
     return (indexOfRow * this.numberOfRows) + indexOfColumn;
   }
@@ -57,67 +65,4 @@ export class Grid {
     this.cells[index] = mark;
   }
 
-  isAnyInRow() {
-    for (let row = 0; row < this.height; row++) {
-      const index = this._calculateIndexFor(row, 0);
-      let expected = this.cells[index];
-      let continuousCount = 1;
-      for (let column = 1; column < this.width; column++) {
-        const index = this._calculateIndexFor(row, column);
-        const current = this.cells[index];
-        if (expected === current) {
-          continuousCount++;
-        } else {
-          expected = current;
-          continuousCount = 1;
-        }
-        if (continuousCount === count) {
-          return expected;
-        }
-      }
-    }
-  }
-
-  isAnyInColumn(count) {
-    for (let column = 0; column < this.height; column++) {
-      const index = this._calculateIndexFor(0, column);
-      let expected = this.cells[index];
-      let continuousCount = 1;
-      for (let row = 1; row < this.width; row++) {
-        const index = this._calculateIndexFor(row, column);
-        const current = this.cells[index];
-        if (expected === current) {
-          continuousCount++;
-        } else {
-          expected = current;
-          continuousCount = 1;
-        }
-        if (continuousCount === count) {
-          return expected;
-        }
-      }
-    }
-  }
-
-  isAnyInDiagonalForwardSlash(count) {
-    for (let column = 0; column < this.height; column++) {
-      const index = this._calculateIndexFor(0, column);
-      let expected = this.cells[index];
-      let continuousCount = 1;
-      for (let row = 1; row < this.width; row++) {
-        const index = this._calculateIndexFor(row, column);
-        const current = this.cells[index];
-        if (expected === current) {
-          continuousCount++;
-        } else {
-          expected = current;
-          continuousCount = 1;
-        }
-        if (continuousCount === count) {
-          return expected;
-        }
-      }
-    }
-  }
 }
-
