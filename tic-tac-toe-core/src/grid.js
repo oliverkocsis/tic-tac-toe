@@ -9,59 +9,22 @@ export class Grid {
     this.cells = new Array(this.width * this.height).map(() => new Cell());
   }
 
-  markX(row, column) {
-    this._mark(row, column, X);
-  }
-
-  markO(row, column) {
-    this._mark(row, column, O);
-  }
-
-  _mark(row, column, mark) {
-    const index = this._calculateIndex(row, column);
+  markX(index) {
     const cell = this.cells[index];
-    if (MARK_EMPTY !== cell) {
-      throw new Error(`The cell (${row}, ${column}) is not empty: ${cell}`);
-    }
-    this.cells[index] = mark;
+    cell.markX();
   }
 
-  isX(row, column) {
-    this._isMark(row, column, X)
-  }
-
-  isO(row, column) {
-    this._isMark(row, column, O)
-  }
-
-  _isMark(row, column, mark) {
-    const index = this._calculateIndex(row, column);
+  markO(index) {
     const cell = this.cells[index];
-    return mark === cell;
+    cell.markO();
   }
 
-  _calculateIndex(row, column) {
-    if (row < 0 || row >= this.height) {
-      throw new Error(`The row number must be between 0 and the height of the grid: ${this.height}`);
-    }
-    if (column < 0 || column >= this.width) {
-      throw new Error(`The column number must be between 0 and the width of the grid: ${this.width}`);
-    }
+  calculateIndex(row, column) {
     return row * this.width + column;
   }
 
-  viewOneDimensional() {
+  view() {
     return this.cells.splice(0);
-  }
-
-  viewTwoDimensional() {
-    const grid = [];
-    for (let i = 0; i < this.height; i++) {
-      const startIndex = i * this.width;
-      const endIndex = (i + 1) * this.width;
-      grid.push(this.cells.slice(startIndex, endIndex));
-    }
-    return grid;
   }
 
   isAnyInRow(count) {

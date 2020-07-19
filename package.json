@@ -18,8 +18,5 @@
   "bugs": {
     "url": "https://github.com/oliverkocsis/tic-tac-toe/issues"
   },
-  "homepage": "https://github.com/oliverkocsis/tic-tac-toe#readme",
-  "devDependencies": {
-    "@types/jasmine": "^3.5.11"
-  }
+  "homepage": "https://github.com/oliverkocsis/tic-tac-toe#readme"
 }
