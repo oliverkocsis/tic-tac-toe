@@ -2,57 +2,7 @@
 
 var _index = require("./index");
 
-describe("Grid", function () {
-  var width = 3;
-  var height = 3;
-  var grid = new _index.Grid(width, height);
-  beforeEach(function () {
-    grid = new _index.Grid(width, height);
-  });
-  it("can view in one dimension", function () {
-    expect(grid.viewOneDimensional()).toEqual([_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY]);
-  });
-  it("can view in two dimensions", function () {
-    expect(grid.viewTwoDimensional()).toEqual([[_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY]]);
-  });
-  it("can mark X", function () {
-    grid.markX(0, 0);
-    expect(grid.viewTwoDimensional()).toEqual([[_index.MARK_X, _index.MARK_EMPTY, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY]]);
-    grid.markX(1, 1);
-    expect(grid.viewTwoDimensional()).toEqual([[_index.MARK_X, _index.MARK_EMPTY, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_X, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY]]);
-    grid.markX(2, 2);
-    expect(grid.viewTwoDimensional()).toEqual([[_index.MARK_X, _index.MARK_EMPTY, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_X, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_X]]);
-  });
-  it("can mark O", function () {
-    grid.markO(0, 2);
-    expect(grid.viewTwoDimensional()).toEqual([[_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_O], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY]]);
-    grid.markO(1, 1);
-    expect(grid.viewTwoDimensional()).toEqual([[_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_O], [_index.MARK_EMPTY, _index.MARK_O, _index.MARK_EMPTY], [_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_EMPTY]]);
-    grid.markO(2, 0);
-    expect(grid.viewTwoDimensional()).toEqual([[_index.MARK_EMPTY, _index.MARK_EMPTY, _index.MARK_O], [_index.MARK_EMPTY, _index.MARK_O, _index.MARK_EMPTY], [_index.MARK_O, _index.MARK_EMPTY, _index.MARK_EMPTY]]);
-  });
-  it("can mark empty spaces only", function () {
-    grid.markX(1, 2);
-    expect(function () {
-      return grid.markX(1, 2);
-    }).toThrowError("The cell (1, 2) is not empty: ".concat(_index.MARK_X));
-  });
-  it("can mark within width and height only", function () {
-    expect(function () {
-      return grid.markX(height, 0);
-    }).toThrowError("The row number must be between 0 and the height of the grid: ".concat(height));
-    expect(function () {
-      return grid.markX(-1, 0);
-    }).toThrowError("The row number must be between 0 and the height of the grid: ".concat(height));
-    expect(function () {
-      return grid.markX(0, width);
-    }).toThrowError("The column number must be between 0 and the width of the grid: ".concat(width));
-    expect(function () {
-      return grid.markX(0, -1);
-    }).toThrowError("The column number must be between 0 and the width of the grid: ".concat(width));
-  });
-});
-describe("Tic-tac-toe", function () {
+xdescribe("Tic-tac-toe", function () {
   var game;
   beforeEach(function () {
     this.game = new _index.TicTacToe();
