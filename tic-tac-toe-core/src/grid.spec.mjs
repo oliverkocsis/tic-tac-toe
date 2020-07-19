@@ -2,53 +2,53 @@ import { Grid } from './grid';
 
 describe("Grid", () => {
 
-  const width = 10;
-  const height = 15;
-  const length = width * height;
-  const count = 5;
-  let grid = new Grid(width, height, count);
+  const numberOfColumns = 10;
+  const numberOfRows = 15;
+  const countToWin = 5;
+  let grid = new Grid(numberOfRows, numberOfColumns, countToWin);
 
   beforeEach(() => {
-    grid = new Grid(width, height, count);
-  });
-
-  it("can view in one dimension", () => {
-    const view = grid.view();
-    expect(view.length).toBe(width * height);
+    grid = new Grid(numberOfRows, numberOfColumns, countToWin);
   });
 
   it("can calculate index from row and column", () => {
-    const markRow = Math.floor(height / 2);
-    const markColumn = Math.floor(width / 3);
-    expect(grid.calculateIndex(0, 0)).toBe(0);
-    expect(grid.calculateIndex(markRow, markColumn)).toBe(markRow * width + markColumn);
-    expect(grid.calculateIndex(height - 1, width - 1)).toBe(width * height - 1);
+    const markRow = Math.floor(numberOfRows / 2);
+    const markColumn = Math.floor(numberOfColumns / 3);
+    expect(grid._calculateIndexFor(0, 0)).toBe(0);
+    expect(grid._calculateIndexFor(markRow, markColumn)).toBe(markRow * numberOfColumns + markColumn);
+    expect(grid._calculateIndexFor(numberOfRows - 1, numberOfColumns - 1)).toBe(numberOfColumns * numberOfRows - 1);
   });
 
   it("can mark X", () => {
-    const markRow = Math.floor(Math.random() * height);
-    const markColumn = Math.floor(Math.random() * width);
+    const markRow = Math.floor(Math.random() * numberOfRows);
+    const markColumn = Math.floor(Math.random() * numberOfColumns);
     grid.markX(markRow, markColumn);
-    const index = grid.calculateIndex(markRow, markColumn);
-    for (let i = 0; i < width * height; i++) {
-      if (i === index) {
-        expect(grid.isX()).toBeTrue();
-      } else {
-        expect(grid.isX()).toBeFalse();
+    const index = grid._calculateIndexFor(markRow, markColumn);
+    for (let row = 0; row < numberOfColumns * numberOfRows; row++) {
+      for (let column = 0; column < numberOfColumns; column++) {
+        if (row === markRow && column == markColumn) {
+          expect(grid.isX(markRow, markColumn)).toBeTrue();
+        } else {
+          expect(grid.isX(markRow, markColumn)).toBeTrue();
+        }
+        expect(grid.isO(markRow, markColumn)).toBeFalse();
       }
     }
   });
 
   it("can mark O", () => {
-    const markRow = Math.floor(Math.random() * height);
-    const markColumn = Math.floor(Math.random() * width);
+    const markRow = Math.floor(Math.random() * numberOfRows);
+    const markColumn = Math.floor(Math.random() * numberOfColumns);
     grid.markO(markRow, markColumn);
-    const index = grid.calculateIndex(markRow, markColumn);
-    for (let i = 0; i < width * height; i++) {
-      if (i === index) {
-        expect(grid.isO()).toBeTrue();
-      } else {
-        expect(grid.isO()).toBeFalse();
+    const index = grid._calculateIndexFor(markRow, markColumn);
+    for (let row = 0; row < numberOfColumns * numberOfRows; row++) {
+      for (let column = 0; column < numberOfColumns; column++) {
+        if (row === markRow && column == markColumn) {
+          expect(grid.isO(markRow, markColumn)).toBeTrue();
+        } else {
+          expect(grid.isO(markRow, markColumn)).toBeTrue();
+        }
+        expect(grid.isX(markRow, markColumn)).toBeFalse();
       }
     }
   });

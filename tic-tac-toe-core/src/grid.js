@@ -1,39 +1,69 @@
-import { Cell } from './cell';
+const X = true;
+const O = false;
 
 export class Grid {
 
-  constructor(width, height, count) {
-    this.width = width;
-    this.height = height;
-    this.count = count;
-    this.cells = new Array(this.width * this.height).map(() => new Cell());
+  constructor(numberOfRows, numberOfColumns, countToWin) {
+    this.numberOfRows = numberOfColumns;
+    this.numberOfColumns = numberOfRows;
+    this.countToWin = countToWin;
+    this.cells = new Array(this.numberOfRows * this.numberOfColumns);
   }
 
-  markX(index) {
-    const cell = this.cells[index];
-    cell.markX();
+  markX(indexOfRow, indexOfColumn) {
+    this._mark(indexOfRow, indexOfColumn, X);
   }
 
-  markO(index) {
-    const cell = this.cells[index];
-    cell.markO();
+  markO(indexOfRow, indexOfColumn) {
+    this._mark(indexOfRow, indexOfColumn, O);
   }
 
-  calculateIndex(row, column) {
-    return row * this.width + column;
+  _mark(indexOfRow, indexOfColumn, mark) {
+    const index = this._calculateIndexFor(indexOfRow, indexOfColumn);
+    const cell = this._getCellAt(index);
+    this._throwErrorIfMarked(cell);
+    this._setCellAt(index, mark);
   }
 
-  view() {
-    return this.cells.splice(0);
+  isX(indexOfRow, indexOfColumn) {
+    return this._is(indexOfRow, indexOfColumn, X);
   }
 
-  isAnyInRow(count) {
+  isO(indexOfRow, indexOfColumn) {
+    return this._is(indexOfRow, indexOfColumn, O);
+  }
+
+  _is(indexOfRow, indexOfColumn, mark) {
+    const index = this._calculateIndexFor(indexOfRow, indexOfColumn);
+    const cell = this._getCellAt(index);
+    return cell === mark
+  }
+
+  _calculateIndexFor(indexOfRow, indexOfColumn) {
+    return (indexOfRow * this.numberOfRows) + indexOfColumn;
+  }
+
+  _getCellAt(index) {
+    return this.cells[index];
+  }
+
+  _throwErrorIfMarked(cell) {
+    if (cell !== undefined) {
+      throw new Error('The cell has been marked already')
+    }
+  }
+
+  _setCellAt(index, mark) {
+    this.cells[index] = mark;
+  }
+
+  isAnyInRow() {
     for (let row = 0; row < this.height; row++) {
-      const index = this._calculateIndex(row, 0);
+      const index = this._calculateIndexFor(row, 0);
       let expected = this.cells[index];
       let continuousCount = 1;
       for (let column = 1; column < this.width; column++) {
-        const index = this._calculateIndex(row, column);
+        const index = this._calculateIndexFor(row, column);
         const current = this.cells[index];
         if (expected === current) {
           continuousCount++;
@@ -50,11 +80,11 @@ export class Grid {
 
   isAnyInColumn(count) {
     for (let column = 0; column < this.height; column++) {
-      const index = this._calculateIndex(0, column);
+      const index = this._calculateIndexFor(0, column);
       let expected = this.cells[index];
       let continuousCount = 1;
       for (let row = 1; row < this.width; row++) {
-        const index = this._calculateIndex(row, column);
+        const index = this._calculateIndexFor(row, column);
         const current = this.cells[index];
         if (expected === current) {
           continuousCount++;
@@ -71,11 +101,11 @@ export class Grid {
 
   isAnyInDiagonalForwardSlash(count) {
     for (let column = 0; column < this.height; column++) {
-      const index = this._calculateIndex(0, column);
+      const index = this._calculateIndexFor(0, column);
       let expected = this.cells[index];
       let continuousCount = 1;
       for (let row = 1; row < this.width; row++) {
-        const index = this._calculateIndex(row, column);
+        const index = this._calculateIndexFor(row, column);
         const current = this.cells[index];
         if (expected === current) {
           continuousCount++;
